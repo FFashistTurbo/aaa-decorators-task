@@ -7,9 +7,10 @@ def redirect_output(filepath):
             original_out = sys.stdout
             with open(filepath, 'w') as output:
                 sys.stdout = output
-                function()
+                output_value = function()
 
             sys.stdout = original_out
+            return output_value
 
         return wrapper
     return decorator

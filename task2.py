@@ -1,21 +1,15 @@
 import sys
-import datetime
+from task1 import my_write
 
 
 def timed_output(function):
     original_write = sys.stdout.write
 
-    def my_write(string_text):
-        now = datetime.datetime.now().strftime("%d-%m-%Y %H:%M")
-        if string_text != '\n':
-            return original_write('[' + now + ']: ' + string_text)
-        return string_text
-
     def wrapper(*args, **kwargs):
         sys.stdout.write = my_write
-        ret_val = function(*args, **kwargs)
+        output_value = function(*args, **kwargs)
         sys.stdout.write = original_write
-        return ret_val
+        return output_value
     return wrapper
 
 
@@ -25,4 +19,5 @@ def print_greeting(name):
 
 
 if __name__ == '__main__':
-    print_greeting("Nikita")
+    result = print_greeting("Nikita")
+    print(result)
